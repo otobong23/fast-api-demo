@@ -1,21 +1,13 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from database import session
+from dependencies.db import get_db
 from model.product_dto import Product_Update
 from model import database_model
 
 router = APIRouter()
 
 NOT_FOUND = {"message": "Product Not found"}
-
-
-def get_db():
-   db = session()
-   try:
-      yield db
-   finally:
-      db.close()
 
 
 @router.get("/")
